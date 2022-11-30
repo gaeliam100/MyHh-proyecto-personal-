@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Confirmacion";
+}
+
+<h1>Confirmacion</h1>
+<form asp-action="Confirmacion" method="post">
+    <h2>Se ha enviado un código de confirmación a tu correo electronico</h2>
+    <input id="code" name="code" class="form-control" type="text" autofocus placeholder="Código de Confirmación" />
+    <button type="submit" class="btn btn-light">Continuar</button>
+</form>

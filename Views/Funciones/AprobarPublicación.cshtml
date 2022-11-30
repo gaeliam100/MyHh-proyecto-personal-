@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "AprobarPublicación";
+}
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8077288999515376"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    @foreach (var pendiente in ViewBag._Pendientes)
+    {
+        <form asp-action="Aprobar" method="post">
+            <div class="container" style="border:solid">
+                <div class="col-md-9">
+                    <h6>ID Publicación</h6>
+                    <input type="text" name="id" value="@pendiente.idPublicación"/>
+                    <h6>Categoria</h6>
+                    <p>@pendiente.Categoria</p>
+                    <h6>Nombre solicitado Libro solicitado</h6>
+                    <p>@pendiente.Titulo</p>
+                    <h6>Solicitado </h6>
+                    <p>@pendiente.IdUsuario</p>
+                    <h6>Estado</h6>
+                    <p>@pendiente.estado</p>
+                    <img style="width:300px; height:300px;"  src="~/Recursos/@pendiente.imagen" />
+                </div>
+                <h1>Contenido de la Historia</h1>
+                <div>
+                    <p>@pendiente.content</p>
+                </div>
+            </div>
+
+            <button type="submit" class=" btn btn-outline-success">Aprobar</button>
+        </form>
+    }
+</body>

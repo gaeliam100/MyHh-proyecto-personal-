@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarHistoria";
+    Layout = null;
+}
+<head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   <style>
+       body {
+           background: #111222;
+       }
+       h3{
+           color:white;
+       }
+       h1{
+           color:white;
+       }
+   </style>
+</head>
+
+<body>
+    <h1>Arma tu Historia </h1>
+    <form asp-action="AgregarHistoria" method="post" enctype="multipart/form-data">
+        <h3>Titulo de la Historia</h3>
+        <input name="Titulo" type="text" class="form-control" required />
+        <h3>Selecciona Una categoria</h3>
+        <select class="form-control" name="categoria"  required>
+            <option>Elige Una opción</option>
+            <option value="Anecdota/Experiencia">Anecdota/Experiencia</option>
+            <option value="Cuento">Cuento</option>
+            <option value="Relato">Relato</option>
+            <option value="Iceberg">Iceberg</option>
+            <option value="Leyenda">Leyenda</option>
+            <option value="Escuela/Hospital">Escuela/Hospital</option>
+            <option value="Lugar">Lugar</option>
+            <option value="Otro">Otro</option>
+        </select>
+        <h3>Elige una Imagen</h3>
+        <input type="file" class="form-control" name="imagen" id="imagen" maxlength="256" placeholder="Imagen">
+        <input type="hidden" class="form-control" name="imagenactual" id="imagenactual">
+        <img src="" width="150" height="120" id="imagenmuestra">
+        <br />
+        <br />
+        <textarea name="contenido" class="form-control" style="resize:none;width:800px; height:800px;" required></textarea>
+        <button class="btn btn-outline-warning">Compartir Histora</button>
+    </form>
+    <a  style="" href="/Funciones/Perfil" class="btn btn-danger">Cancelar</a>
+</body>
+<!--Mostrar Imagen script-->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Asignamos el atributo src a la tag de imagen
+                $('#imagenmuestra').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    // El listener va asignado al input
+    $("#imagen").change(function () {
+        readURL(this);
+    });
+</script>

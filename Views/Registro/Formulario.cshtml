@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Formulario";
+}
+@model User
+<h1>Formulario</h1>
+<div class="text-center">
+    <h1 class="display-4">Crea una Perfil</h1>
+    <p>Se parte de la comunidad y comparte una Historia.</p>
+</div>
+
+<style>
+    .Icons {
+        background: blueviolet;
+        height: 50px;
+        width: 100%;
+    }
+
+    #subicon {
+        display: inline-flex;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: transparent;
+        float: left;
+        width: 50px;
+        margin-bottom: 5px;
+    }
+
+        #subicon:hover {
+            transform: scale(1.7);
+        }
+</style>
+<form asp-action="Formulario" method="post">
+    <label class="form-check-label">Nombre de Usuario</label>
+    <input asp-for="Usuario" type="text" required maxlength="10" class="form-control" placeholder="Ingresa tu nombre de Usuario" />
+    <label for="edad">Edad</label>
+    <input asp-for="Edad" type="number" placeholder="Introduce tu edad" class="form-control" />
+    <label>Correo Electronico</label>
+    <input asp-for="Correo" type="email" placeholder="Correo Electronico" class="form-control" />
+    <label>Contraseña</label>
+    <input  asp-for="Contraseña" type="password" placeholder="contraseña" class="form-control" required />
+    <label>Confirmar contraseña</label>
+    <input type="password" placeholder="Confirmar contraseña" required class="form-control" />
+    <label>Selecciona una imagen de perfil</label>
+    <input type="file" class="form-control-file" placeholder="Selecciona un archivo" />
+    <label>O selecciona Una Imagen</label>
+    <div class="Icons text-center" id="Iconos">
+        <div id="subicon"><a><img src="/Iconos/calabaza.png" alt="Calabaza" width="50" height="50" /></a></div>
+        <div id="subicon"><a><img src="/Iconos/fantasma.png" alt="fantasma" width="50" height="50" /></a></div>
+        <div id="subicon"><a><img src="/Iconos/momia.png" alt="momia" width="50" height="50" /></a></div>
+        <div id="subicon"><a><img src="/Iconos/globo.png" alt="globo" width="50" height="50" /></a></div>
+    </div>
+
+    <button id="Regis" type="submit" class="btn-group btn-group-lg">Registrar</button>
+
+</form>

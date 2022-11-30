@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewData["Title"] = "Publicaciones";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/galeryBus.css">
+    <title>MyHH-Historias</title>
+    <style>
+        .Text{
+            font-size: 16px;
+            font-family: monospace;
+            height: 15em;
+            resize: none;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<!--
+    navegacion
+-->
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MyHH</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú de Opciones</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Funciones/Publicaciones">Historias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Funciones/Publicaciones">¿compartir una historia?</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Da clic y despliega
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">acerca de</a></li>
+                                <li><a class="dropdown-item" href="/Registro/Recuperar">Recuperar Contraseña</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Hola esto no te lleva a ningun lado ¿o si?</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--
+    navegacion
+    -->
+    <br />
+    <br />
+    <hr />
+    <div class="contenedor">
+        <header>
+            <div class="logo">
+                <h1 style="color:white;"> Busca una Historia</h1>
+                <p style="color:aliceblue;">Descubre que se cuenta</p>
+            </div>
+            <form action="">
+                <input type="text" class="barra-busqueda" id="barra-busqueda" placeholder="Buscar">
+            </form>
+            <div class="categorias" id="categorias">
+                <a href="#" class="activo">Todos</a>
+                <a href="#">Anecdota/Experiencia</a>
+                <a href="#">Cuento</a>
+                <a href="#">Relato</a>
+                <a href="#">Iceberg</a>
+                <a href="#">Escuela/Hospital</a>
+                <a href="#">Leyenda</a>
+                <a href="#">Lugar</a>
+                <a href="#">Otro</a>
+            </div>
+        </header>
+        <!--zona Foreach-->
+        <form asp-action="Estrella" method="post">
+            <section class="grid" id="grid">
+                @foreach (var relato in ViewBag._Todo)
+                {
+                <div class="item"
+                     data-categoria="@relato.Categoria"
+                     data-etiquetas="@relato.Categoria"
+                     data-descripcion="@relato.content"
+                     data-titulo="@relato.Titulo"
+                     data-publicacion="@relato.idPublicación">
+                    <div class="item-contenido">
+                        <img src="/Recursos/@relato.imagen" alt="">             
+                        <i style="color:yellow;" class="fa-star">Estrellas: @relato.like</i>
+                        
+                    </div>
+
+                    <input name="id" hidden type="text" value="@relato.idPublicación" />
+                </div>
+                
+                }
+            </section>
+
+            <section class="overlay" id="overlay">
+                <div class="contenedor-img">
+
+                    <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                    <img src="" alt="">
+                </div>
+                <h1 style="color:white;" class="titulo"></h1>
+
+                <p class="descripcion scrol Text"></p>
+                <a name="id" hidden class="publi"></a>
+                <p class=" descripcion"></p>
+                @if (ViewBag._Like.Estrella==0)
+                {
+                    <button type="submit" class="btn btn-outline-warning">Dar Estrella</button>
+                }
+                else if(ViewBag._Like.Estrella==1)
+                {
+                    <button type="submit" disabled class="btn btn-outline-danger">Ya le Has dado una estrella</button>
+                }
+            </section>
+        </form>
+        <!--
+        Cometarios
+        -->
+        <!--Termina El Foreach-->
+    </div>
+
+    <script src="https://unpkg.com/web-animations-js@2.3.2/web-animations.min.js"></script>
+    <script src="https://unpkg.com/muuri@0.8.0/dist/muuri.min.js"></script>
+    <script src="~/js/galeryB.js"></script>
+</body>
+</html>
