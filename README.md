@@ -1,2 +1,2 @@
 # MyHh-proyecto-personal-
-quería crear una red social de historias de terror e hice esto 
+quería crear una red social de historias de terror he hice esto 
